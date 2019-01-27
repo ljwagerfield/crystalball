@@ -1,8 +1,8 @@
 import * as React from "react";
-import {chartData} from "shared/state/domains/charts/Data";
+import {chartData} from "shared/state/domains/charts/Index";
 import "./ChartList.scss"
 
-const chartNames = Object.keys(chartData);
+const chartNames = chartData.map(x => x.title);
 
 interface ChartListProps {
   selection: string[];
