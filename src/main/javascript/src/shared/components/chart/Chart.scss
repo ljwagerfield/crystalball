@@ -1,0 +1,25 @@
+@import "~shared/modules/styles/Variables";
+
+.chart {
+  background: #fff;
+  padding-top: 14px;
+
+  position: absolute;
+  left: 0;
+  right: $sidebar-width;
+  top: 0;
+  bottom: 0;
+
+  p {
+    display: block;
+    padding: 18px;
+    font-size: 1.1em;
+    width: 200px;
+    text-align: center;
+    background: #fff;
+    color: #888;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin: 305px auto 0 auto;
+  }
+}

@@ -1,0 +1,113 @@
+.browsers {
+  text-align: center;
+  padding-top: 60px;
+  > h2, > p {
+    color: #333;
+  }
+  > h2 {
+    font-size: 38px;
+  }
+  > p {
+    font-size: 18px;
+  }
+}
+.browsers-choices {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  a {
+    padding-top: 30px;
+    display: block;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.browsers-choice {
+  padding-top: 120px;
+  padding-bottom: 13px;
+  background: #f9f9f9;
+  height: 225px;
+  position: relative;
+  &:before {
+    font-size: 68px;
+    margin-left: -34px;
+    left: 50%;
+    top: 18px;
+  }
+  &:hover {
+    background: #fff;
+  }
+}
+.browsers-title {
+  color: #555;
+}
+.browsers-download {
+  color: #666;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  height: 45px;
+  display: block;
+}
+.browsers-chrome, .browsers-firefox, .browsers-opera {
+  .browsers-download {
+    height: 34px;
+  }
+}
+.browsers-chrome {
+  &:before {
+    color: #f2b635;
+    content: '\e90b';
+  }
+  &:hover > p {
+    color: #f2b635 !important;
+  }
+}
+.browsers-firefox {
+  &:before {
+    color: #cc4d27;
+    content: '\e90c';
+  }
+  &:hover > p {
+    color: #cc4d27 !important;
+  }
+}
+.browsers-safari {
+  &:before {
+    color: #0687c4;
+    content: '\e907';
+  }
+  &:hover > p {
+    color: #0687c4 !important;
+  }
+}
+.browsers-opera {
+  &:before {
+    color: #df1325;
+    content: '\e909';
+  }
+  &:hover > p {
+    color: #df1325 !important;
+  }
+}
+.browsers-ie {
+  &:before {
+    color: #12bbf0;
+    content: '\e90d';
+  }
+  &:hover > p {
+    color: #12bbf0 !important;
+  }
+}
+.browsers-edge {
+  &:before {
+    color: #2f77bd;
+    content: '\e908';
+  }
+  &:hover > p {
+    color: #2f77bd !important;
+  }
+}

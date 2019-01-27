@@ -1,0 +1,49 @@
+@import "~shared/modules/styles/Variables";
+
+.fieldset-overlay {
+  position: relative;
+  fieldset {
+    opacity: 1;
+  }
+}
+
+.fieldset-overlay-active {
+  &.fieldset-overlay {
+    &:after {
+      // Transparant overlay prevents clicking non-form elements (e.g. links).
+      content: ' ';
+      background: transparent;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    fieldset[disabled] {
+      opacity: 0.65;
+    }
+    fieldset[disabled] .form-control, fieldset[disabled] .btn {
+      opacity: initial; // Provided by .fieldset-overlay
+      cursor: default;
+    }
+  }
+
+  &.fieldset-overlay-spinner {
+    fieldset[disabled] {
+      opacity: 0.4; // Reduce opacity for spinner
+    }
+    &:before {
+      // WARNING: the 'size' is very temperamental and causes wobbling rotation at certain values. CHANGE WITH CAUTION!
+      $size: 145px;
+      content: "\e92a";
+      font-family: 'icomoon' !important;
+      color: #96ccf2; // $brand-primary at 50% opacity.
+      font-size: $size;
+      position: absolute;
+      left: 50%;
+      top: 154px;
+      animation: spin 1s infinite linear;
+      margin-left: -1 * ($size / 2);
+    }
+  }
+}

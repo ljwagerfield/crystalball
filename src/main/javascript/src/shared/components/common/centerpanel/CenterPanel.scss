@@ -1,0 +1,8 @@
+@import "~shared/modules/styles/Variables";
+
+.center_panel {
+  max-width: 365px;
+  width: 100%;
+  margin: 0 auto;
+  padding: $grid-gutter-width / 2;
+}

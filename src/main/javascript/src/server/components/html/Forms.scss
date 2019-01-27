@@ -1,0 +1,420 @@
+@import "~shared/modules/styles/Variables";
+
+$btn-large-padding: 30px;
+
+// Reduce Bootstrap's outline blur from 6px to 4px.
+@mixin form-control-validation-overrides-focus($border-color) {
+  border-color: darken($border-color, 5%);
+  $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 4px lighten($border-color, 20%);
+  @include box-shadow($shadow);
+}
+
+@mixin form-control-validation-overrides($text-color: #555, $border-color: #ccc, $background-color: #f5f5f5) {
+  border-color: $border-color;
+  &:focus {
+    @include form-control-validation-overrides-focus($border-color);
+  }
+}
+
+// Reduce Bootstrap's outline blur from 8px to 6px.
+.form-control:focus {
+  $color: $input-border-focus;
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  $border-color: $color;
+  $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($border-color, 20%);
+  @include box-shadow($shadow);
+}
+.form-control[disabled] {
+  cursor: default;
+  background-color: #f7f7f7;
+}
+.has-success .form-control {
+  @include form-control-validation-overrides($state-success-text, $state-success-text, $state-success-bg);
+}
+.has-warning .form-control {
+  @include form-control-validation-overrides($state-warning-text, $state-warning-text, $state-warning-bg);
+}
+.has-error .form-control {
+  @include form-control-validation-overrides($state-danger-text, $state-danger-text, $state-danger-bg);
+}
+
+// STRIPE
+.StripeElement {
+  border: 1px solid $input-border;
+  border-radius: $input-border-radius;
+  height: $input-height-base;
+  padding: ($padding-base-vertical + 2px) $padding-base-horizontal;
+
+  // Copied from the browser... generated somewhere deep within bootstrap :(
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+  // DO NOT ADD THESE! It causes the border to go black temporarily when the page loads, which is very distracting.
+  //-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  //-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  //transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.StripeElement--focus {
+  @include form-control-validation-overrides-focus($input-border-focus);
+}
+.StripeElement--invalid {
+  @include form-control-validation-overrides($state-danger-text, $state-danger-text, $state-danger-bg);
+  &.StripeElement--focus {
+    @include form-control-validation-overrides-focus($state-danger-text);
+  }
+}
+.StripeElement--webkit-autofill {
+  background: $input-bg !important;
+}
+
+// SELECT
+select {
+  width: 100%;
+  padding: $padding-base-vertical $padding-base-horizontal;
+
+  -webkit-animation: 1ms void-animation-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: $input-border-radius;
+  border: none !important;
+
+  , &:-webkit-autofill {
+    background: $input-bg !important;
+    -webkit-box-shadow: 0 0 0 30px white inset; // Required to remove yellow auto-fill background.
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 20px;
+  }
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+}
+.select { // Wrapper <div class="select"> goes around the <select> to provide border across browsers.
+  height: $input-height-base;
+  position: relative;
+  border: 1px solid $input-border;
+  border-radius: $input-border-radius;
+  &:after {
+    font-family: 'icomoon' !important;
+    content: '\e91b';
+    position: absolute;
+    right: $padding-base-horizontal;
+    top: 50%;
+    margin-top:-2.5px;
+    width: 10px;
+    line-height: 5px;
+    color: $text-color;
+  }
+}
+
+/* Prevent common fields (like email) from getting the yellow auto-complete background. */
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+@-webkit-keyframes autofill {
+  to {
+    background: $input-bg;
+  }
+}
+
+input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0;
+}
+.checkbox-label-left {
+  vertical-align: middle;
+}
+
+.has-error .help-block {
+  background: $alert-danger-bg;
+  border: 1px solid $alert-danger-border;
+  border-radius: $border-radius-base;
+  padding: 5px 8px;
+  font-size: 0.95em;
+  margin-top: 6px;
+
+  /* CSS Trick to render a triangle w/ a border (to create a tooltip effect) */
+  position: relative;
+  &:before, &:after {
+    position: absolute;
+    bottom: 100%;
+    left: 10px;
+    border: solid transparent;
+    content: ' ';
+  }
+  &:before {
+    border-bottom-color: $alert-danger-border;
+    border-width: 6px;
+    margin-left: -1px;
+  }
+  &:after {
+    border-bottom-color: $alert-danger-bg;
+    border-width: 5px;
+  }
+}
+.form-group-lg.has-error .help-block {
+  padding: 12px 10px;
+}
+
+label {
+  font-weight: $bold-weight;
+  display: block;
+}
+
+fieldset[disabled] {
+  .form-control, .btn {
+    opacity: 0.65;
+    cursor: default;
+  }
+}
+fieldset[disabled] .form-control {
+  background: #fff;
+}
+
+.form-pending, .form-succeeded {
+  button[type="submit"].btn {
+    position: relative;
+
+    &:before {
+      top: 50%;
+      font-size: 15px;
+      margin-top: -7.5px;
+      margin-left: -22px;
+    }
+    &.input-lg:before {
+      font-size: 17px;
+      margin-left: -27px;
+      margin-top: -8px;
+    }
+    &:not(.btn-block) {
+      padding-left: 34px;
+    }
+    &.navbar-btn {
+      padding-left: 32px; /* Nav buttons are slighly smaller... */
+    }
+    &.btn-lg {
+      padding-left: $btn-large-padding + 15px;
+    }
+  }
+}
+.form-succeeded button[type="submit"].btn:before {
+  content:"\e901";
+}
+.form-pending button[type="submit"].btn:before {
+  content:"\e900";
+  animation: spin 1s infinite linear;
+}
+.form-control-validating {
+  position: relative;
+  &:before {
+    content:"\e900";
+    color:$brand-primary;
+    opacity: 0.45;
+    animation: spin 1s infinite linear;
+    right: 11px;
+    top: 50%;
+    margin-top: -8px;
+  }
+}
+
+.btn-link-icon {
+  &:hover, &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+  padding: 0;
+}
+
+$btn-padding-horizontal: 18px;
+
+.btn {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: $btn-padding-horizontal;
+  padding-right: $btn-padding-horizontal;
+  &:focus, &:focus:active, &:focus:hover, &:focus:visited {
+    outline: none;
+  }
+
+  /* For vertical-aligning icons and button text. */
+  > span {
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+.btn-continue {
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .icon_right {
+    font-size: 13px;
+    top: -1px;
+  }
+}
+
+.btn-cta-container {
+  padding: 5px 0 25px 0;
+}
+
+.btn-cta-container-2 {
+  padding: 20px 0 10px 0;
+
+  /* This CTA is designed to cater for the in-well header disappearing on mobile. */
+  @media (max-width: $screen-vs-max) {
+    padding-top: 10px;
+  }
+}
+
+.label-link {
+  float: right;
+  font-size: 0.95em;
+}
+.form-group small {
+  font-size: 0.9em;
+}
+.form-group-lg small, .small-lg {
+  font-size: 0.94em;
+}
+
+.input-icon-right {
+  position: relative;
+  input {
+    padding-right: 42px;
+  }
+  span {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    font-size: 20px;
+    right: 0;
+    width: 40px;
+    color: #d0d0d0;
+
+    &:before {
+      top: 50%;
+      margin-top: -11px;
+      right: 14px;
+      position: absolute;
+    }
+  }
+}
+
+.btn-icon-left {
+  padding-left: $btn-padding-horizontal - 2px;
+  [class^="icon-"] {
+    margin-right: 5px;
+  }
+}
+
+.btn-outline {
+  color: $brand-primary;
+  background: transparent;
+  , &.active, &:active {
+    box-shadow: inset 0 0 0 1px $brand-primary;
+  }
+}
+
+.btn-strong {
+  font-weight: 600;
+}
+
+.btn-text {
+  color: $brand-primary;
+  background: transparent;
+  border: transparent;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+  line-height: $input-height-large - 2px; // Minus border width * 2.
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  padding: 0 $btn-large-padding;
+}
+
+.form-horizontal {
+  display: flex;
+  flex-direction: row;
+  > .form-group {
+    display: inline-block;
+    margin: 0 0 0 8px;
+    &:first-child {
+      margin-left: 0;
+      width: 100%; // Assume text input is first, button is last.
+    }
+  }
+}
+
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
+  float: none;
+}
+
+@media (min-width: ($screen-xs + 1px)) {
+  .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
+    margin-left: 9px;
+  }
+
+  .btn-toolbar-sm .btn, .btn-toolbar-sm .btn-group, .btn-toolbar-sm .input-group {
+    margin-left: 7px;
+  }
+
+  .btn-toolbar, .btn-toolbar-single {
+    padding-top: 30px;
+  }
+
+  .btn-toolbar-no_pad {
+    padding-top: 0;
+  }
+
+  .btn-toolbar {
+    margin-left: -9px;
+  }
+
+  .btn-toolbar-sm {
+    margin-left: -7px;
+  }
+
+  .btn-toolbar .btn-text {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
+    margin-top: 9px;
+    margin-left: 0;
+    display: block;
+    width: 100%;
+  }
+  .btn-toolbar, .btn-toolbar-single {
+    padding-top: 20px;
+  }
+  .btn-toolbar {
+    margin-top: -9px;
+    margin-left: 0;
+  }
+}
+
+input::-webkit-input-placeholder {
+  color: $input-color-placeholder !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: $input-color-placeholder !important;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+  color: $input-color-placeholder !important;
+}
+
+input:-ms-input-placeholder {
+  color: $input-color-placeholder !important;
+}

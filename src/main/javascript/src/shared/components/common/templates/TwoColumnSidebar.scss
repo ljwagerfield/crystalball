@@ -1,0 +1,49 @@
+@import "~shared/modules/styles/Variables";
+
+.two_column_sidebar {
+  $padding-sm: 25px;
+  $padding-lg: 32px;
+  padding: 0 0 15px 0;
+  h3 {
+    font-size: $font-size-base;
+    padding: 23px $padding-sm 20px $padding-sm;
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li {
+      margin: 0;
+      padding: 0;
+      a {
+        padding: 14px $padding-sm;
+        border: none;
+        display: block;
+        color: #888;
+        font-family: $headings-font-family;
+        &.active {
+          background: #f8f8f8;
+          color: $brand-primary;
+        }
+        &:hover {
+          background: #f8f8f8;
+        }
+        .icon_left {
+          margin-right: 16px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    h3, ul li a {
+      padding-left: $padding-lg;
+      padding-right: $padding-lg;
+    }
+  }
+  @media (max-width: $screen-sm-max) {
+    display: none;
+  }
+}

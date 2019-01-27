@@ -1,0 +1,25 @@
+@import "~shared/modules/styles/Variables";
+
+.chart-list {
+  background: #fafafa;
+  border-left: 1px solid #eee;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  padding-top: 25px;
+
+  a {
+    display: block;
+    padding: 15px 15px;
+    margin-left: 15px;
+    cursor: pointer;
+    &.selected {
+      border: 1px solid #f0f0f0;
+      background: #fcfcfc;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+  }
+}

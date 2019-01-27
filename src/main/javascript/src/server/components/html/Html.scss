@@ -1,0 +1,368 @@
+$web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700|Source+Sans+Pro:400,600|Roboto+Mono:400";
+
+@import url($web-font-path);
+@import "~shared/modules/styles/Variables";
+@import "~assets/inlineable/icomoon/style";
+@import "Bootstrap";
+@import "./Forms";
+@import "./OldBrowsers";
+
+body {
+  font-weight: $regular-weight;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @media (min-width: $screen-sm-min) {
+    overflow-y: scroll; /* Prevents X jumping between pages/modes w/ or w/o content that exceeds the viewport. */
+  }
+  overflow-x: hidden; // Prevent horizontal scrolling on homepage (as the form goes off-screen for the slide-in transition).
+}
+
+.show_on_old_browsers {
+  display: none;
+}
+
+.lt_ie10 {
+  .hide_on_old_browsers {
+    display: none;
+  }
+  .show_on_old_browsers {
+    display: block !important;
+  }
+}
+
+.page-modal {
+  padding: 30px 0;
+}
+.page-modal-overlay {
+  overflow: hidden;
+}
+.page-white {
+  background: #fff;
+}
+.page-footer-lg {
+  padding-bottom: 0;
+}
+.page-grey-light {
+  background: #f3f3f3;
+}
+.page-grey-lighter {
+  background: #f9f9f9;
+}
+.container.white {
+  background: #fff;
+}
+@media (min-width: $screen-sm-min) {
+  .page-force-scroll {
+    /* Used when we require the X positions of common elements to always be the same across pages (e.g.
+       for animating between two pages). This prevents the possibility of the scrollbar appearing on one
+       page (pushing elements left slightly) and not on the other. We're unlikely to want this on mobile,
+       so we only apply on desktop devices, since horizontal space is scarce enough! */
+    overflow-y: scroll;
+  }
+}
+
+strong {
+  font-weight: $bold-weight;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  padding-top: 0.5em; // Use padding to enforce white space
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  &:first-child, &.is-first-child {
+    padding-top: 0;
+  }
+}
+.no-bm {
+  margin-bottom: 0 !important;
+}
+.well-external-title {
+  color: #777;
+  margin: 0 0 20px 0;
+  padding-top: 0;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: -0.8px;
+  &:first-child {
+    margin-top: 40px;
+  }
+}
+.alert:last-child:not(:first-child) {
+  margin: 21px 0 0 0;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  position: relative;
+}
+
+.icon_text {
+  vertical-align: middle;
+}
+.icon_left {
+  margin-right: 0.35em;
+  vertical-align: middle;
+}
+.icon_right {
+  margin-left: 0.35em;
+  vertical-align: middle;
+}
+.with-icon:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-size: 16px;
+  position: absolute;
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.p_line_height {
+  line-height: $line-height-base;
+}
+
+@media (max-width: $screen-vs-max) {
+  .visible-mobile-inline {
+    display: inline !important;
+  }
+  .visible-mobile-block {
+    display: block !important;
+  }
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .visible-mobile-block, .visible-mobile-inline {
+    display: none !important;
+  }
+}
+
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+.well-no-fill {
+  background: transparent;
+  box-shadow: none;
+}
+
+.badge {
+  max-width: 50px;
+  opacity: 1;
+  transition: max-width 0.2s linear, opacity 0.15s linear, margin-left 0.2s linear, margin-right 0.2s linear, padding-left 0.2s linear, padding-right 0.2s linear;
+  &.badge-loading {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.nav-tabs {
+  border: none;
+  .badge {
+    font-size: 0.85em;
+    padding: 5px 7px 4px 7px;
+    margin-left: 8px;
+    top: -1px;
+    position: relative;
+    font-weight: 500;
+  }
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  cursor: pointer;
+  border-top: 2px solid $link-color;
+  color: #000;
+  background: linear-gradient(to bottom, #ffffff 0%, #fdfdfd 100%);
+
+  /* IMPORTANT: prevents .badge elements from going onto next line at start of animation (when they start from 0-width) */
+  white-space: nowrap;
+}
+.nav-tabs-body {
+  border-top: 1px solid $gray-lighter;
+  &:before {
+    background: linear-gradient(to bottom, #fdfdfd 0%, $body-bg 100%);
+    height: 30px;
+    content: " ";
+    display: block;
+  }
+}
+
+.loading_box {
+  $size: 40px;
+  height: 100px;
+  position: relative;
+  &:before {
+    color: #cfcfcf;
+    font-size: $size;
+    content: "\e900";
+    animation: spin 1s infinite linear;
+    left:50%;
+    top: 50%;
+    margin-left: -1 * ($size / 2);
+    margin-top: -1 * ($size / 2);
+  }
+}
+.loading_box-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: $body-bg;
+  opacity: 0.9;
+  &:before {
+    top: 100px;
+    color: #c0c0c0;
+  }
+}
+
+.no-pad {
+  padding: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.pipe-separator {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.well {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+pre {
+  background: #fff;
+  text-align: left; // Code should always be left-aligned, even when the outer container is central.
+}
+
+@media (max-width: $screen-vvs-max) {
+  pre code {
+    font-size: 13px;
+  }
+}
+
+p code:only-child {
+  padding: 0;
+}
+
+.btn-outline {
+  &.active, &:active, &:focus, &:hover {
+    color: $brand-primary;
+  }
+}
+
+ol li {
+  padding-left: 0.4em;
+}
+
+.table-active-row {
+  background-color: $brand-primary-lightest;
+}
+
+.tooltip-link-question {
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: $link-hover-color;
+}
+.tooltip-link {
+  position: relative;
+  &:hover {
+    div {
+      display: block;
+    }
+  }
+  div {
+    font-size: 0.96em;
+    border-radius: 2px;
+    font-weight: $regular-weight;
+    position:absolute;
+    white-space:nowrap;
+    top:100%;
+    left: 50%;
+    margin-left: -17px;
+    margin-top: 6px;
+    background:$state-info-bg;
+    color:$state-info-text;
+    border: 1px solid $state-info-border;
+    padding:8px 12px 9px 12px;
+    display: none;
+    z-index: $zindex-tooltip;
+    text-align: left;
+
+    ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 2px 0 0 18px;
+    }
+
+    /* CSS Trick to render a triangle w/ a border (to create a tooltip effect) */
+    &:before, &:after {
+      position: absolute;
+      bottom: 100%;
+      left: 10px;
+      border: solid transparent;
+      content: ' ';
+    }
+    &:before {
+      border-bottom-color: $state-info-border;
+      border-width: 6px;
+      margin-left: -1px;
+    }
+    &:after {
+      border-bottom-color: $state-info-bg;
+      border-width: 5px;
+    }
+  }
+}
+
+.strong {
+  font-weight: $bold-weight;
+}
+
+.badge {
+  max-width: none;
+}
+.badge-right {
+  margin-top: -3px;
+  margin-left: 8px;
+}
+.badge-danger {
+  background: $brand-danger;
+}
+.badge-warning {
+  background: $brand-warning;
+}
+
+.container-white {
+  background: #fff;
+}
